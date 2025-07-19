@@ -1,0 +1,11 @@
+import requests
+
+def get_latest_block(chain):
+    if chain == 'btc':
+        r = requests.get('https://blockchain.info/latestblock')
+        return {'height': r.json()['height'], 'time': r.json()['time']}
+    elif chain == 'eth':
+        r = requests.get('https://api.blockcypher.com/v1/eth/main')
+        return {'height': r.json()['height'], 'time': r.json()['time']}
+    else:
+        raise ValueError(f"Unsupported chain: {chain}")
